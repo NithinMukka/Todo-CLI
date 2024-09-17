@@ -8,14 +8,25 @@ let tasks = [];
 try {
   if (fs.existsSync(TASKS_FILE)) {
     const fileContent = fs.readFileSync(TASKS_FILE, 'utf8');
-    console.log('File content:', fileContent); 
-    tasks = fileContent ? JSON.parse(fileContent) : [];
-    console.log('Loaded tasks:', tasks);  
+    console.log('File content:', fileContent);  // Log file content
+    if (fileContent.trim() === '') {
+      console.log('Tasks file is empty. Initializing with an empty array.');
+      tasks = [];
+    } else {
+      try {
+        tasks = JSON.parse(fileContent);
+        console.log('Loaded tasks:', tasks);  // Log loaded tasks
+      } catch (parseError) {
+        console.error('Error parsing tasks file. Initializing with an empty array:', parseError.message);
+        tasks = [];
+      }
+    }
   } else {
     console.log('Tasks file does not exist. Will create on first add.');
   }
 } catch (error) {
   console.error('Error reading tasks file:', error);
+  tasks = [];
 }
 
 program
