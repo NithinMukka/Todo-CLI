@@ -1,8 +1,7 @@
 
-# Project Title
+# TODO-CLI
 
-A brief description of what this project does and who it's for
-
+Add and Delete your tasks in your own Command Line
 
 ## Installation
 
